@@ -1,0 +1,11 @@
+/* Ensure all card images have the same size */
+.card-img-top {
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Ensure the image scales properly without distortion */
+    width: 100%; /* Make the image fill the card width */
+    border-radius: 5px; /* Optional: Add rounded corners */
+  }
+
+.fa-star{
+    color: gold;
+}

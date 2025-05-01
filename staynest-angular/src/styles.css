@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+.btn{
+    background-color: #fe7f22;
+    border: none;
+}
+.btn:hover{
+    background-color: #008c9d;
+    color: #fff;
+}
+.titletxt{
+    color: #fe7f22;
+}
+/* footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    z-index: 1000;
+  } */

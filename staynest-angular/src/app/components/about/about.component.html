@@ -1,0 +1,73 @@
+<!-- About Section -->
+<section class="container py-3 fade-in col-md-8">
+    <h2 class="text-center mb-5">
+      <span class="titletxt">{{ whoWeAreTitle }}</span>
+    </h2>
+    <p class="about-text text-center fw-semibold mb-0">{{ whoWeAreDescription }}</p>
+    <p class="about-text text-center fw-semibold">{{whoWeAreDescription2}}</p>
+
+</section>
+    <section class="container fade-in">
+        <h2 class="text-center mb-5">
+          <span class="titletxt">{{ missionvissionTitle }}</span>
+        </h2>
+        <p class="about-text text-center fw-semibold">{{missionvissionDescription}}</p>
+        <div class="row align-items-center">
+          <!-- Image -->
+          <div class="col-lg-3 text-center">
+            <img src="assets/images/vision.jpg" alt="Vision" class="img-fluid rounded shadow-sm">
+          </div>
+      
+          <!-- Vision -->
+          <div class="col-lg-3 text-center">
+            
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <h4 class="titletxt">{{ visionTitle }}</h4>
+            <p class="about-text">{{ visionDescription }}</p>
+          </div>
+      
+          <!-- Image -->
+          <div class="col-lg-3 text-center">
+            <img src="assets/images/mission-page.jpg" alt="Mission" class="img-fluid rounded shadow-sm">
+          </div>
+      
+          <!-- Mission -->
+          <div class="col-lg-3 text-center">
+            <i class="fas fa-bullseye"></i>
+            <h4 class="titletxt">{{ missionTitle }}</h4>
+            <ul class="list-group list-group-flush mx-auto mission-list">
+              <li class="list-group-item" *ngFor="let mission of missionPoints">{{ mission }}</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+  
+  
+  <!-- Testimonials -->
+  <section class="container py-5 fade-in">
+    <h2 class="text-center mb-5">
+      <span class="titletxt">{{ testimonialsTitle }}</span>
+    </h2>
+    <div class="row g-4">
+      <div class="col-md-6" *ngFor="let testimonial of testimonials">
+        <div class="testimonial border p-4 rounded shadow-sm">
+          <p>"{{ testimonial.text }}"</p>
+          <strong>- {{ testimonial.author }}</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Team -->
+  <section class="container py-5 fade-in">
+    <h2 class="text-center mb-5">
+      <span class="titletxt">{{ teamTitle }}</span>
+    </h2>
+    <div class="row g-4 justify-content-center">
+      <div class="team-member col-6 col-sm-4 col-md-3 col-lg-2 text-center" *ngFor="let member of team">
+        <img [src]="member.image" [alt]="member.name" />
+        <h5 class="mt-2 mb-0">{{ member.name }}</h5>
+        <p class="p-0">{{ member.role }}</p>
+      </div>
+    </div>
+  </section>
