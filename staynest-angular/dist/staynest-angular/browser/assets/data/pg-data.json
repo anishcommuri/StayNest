@@ -1,0 +1,63 @@
+[
+    {
+        "id": 1,
+        "name": "StayNest Elite PG",
+        "rating": 4.5,
+        "location": "Koramangala, Bangalore",
+        "price": 8500,
+        "sharingType": "Double",
+        "amenities": [
+            "WiFi",
+            "Meals",
+            "Housekeeping",
+            "Laundry"
+        ],
+        "image": "assets/images/PG2.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Urban Nest",
+        "rating": 4.0,
+        "location": "Powai, Mumbai",
+        "price": 10500,
+        "sharingType": "Single",
+        "amenities": [
+            "AC",
+            "Security",
+            "Gym Access"
+        ],
+        "image": "assets/images/PG1.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Cozy Corner PG",
+        "rating": 4.2,
+        "location": "HiTech City, Hyderabad",
+        "price": 6500,
+        "sharingType": "Triple",
+        "amenities": [
+            "WiFi",
+            "Common Kitchen",
+            "Parking"
+        ],
+        "image": "assets/images/pg5.jpg"
+    },
+    {
+        "name": "Sunrise PG",
+        "rating": 4.3,
+        "location": "Koramangala, Bangalore",
+        "price": 4500,
+        "sharingType": "Double",
+        "amenities": ["Wifi", "AC", "Laundry"],
+        "image": "assets/images/pg4.jpg"
+    },
+    {
+        "name": "Cozy Nest",
+        "rating": 4.1,
+        "location": "Andheri, Mumbai",
+        "price": 7000,
+        "sharingType": "Single",
+        "amenities": ["Wifi", "Laundry"],
+        "image": "assets/images/PG1.jpg"
+    }     
+]

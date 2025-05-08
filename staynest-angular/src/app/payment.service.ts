@@ -1,43 +1,56 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-declare var Razorpay: any; // important because Razorpay is loaded globally
+declare var Razorpay: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
 
-  constructor() { }
+  private backendUrl = 'https://staynest-iejd.onrender.com'; // Your Render backend URL
 
-  payWithRazorpay(orderId: string, amount: number, name: string, email: string, contact: string) {
-    const options: any = {
-      key: 'rzp_live_HHXT6nADA10Liz', // Replace with your Razorpay Key ID
-      amount: amount * 100, // Amount is in paise (e.g., 500 for ₹5.00)
-      currency: 'INR',
-      name: name,
-      description: 'Payment',
-      order_id: orderId, // This should come from your backend
-      prefill: {
+  constructor(private http: HttpClient) {}
+
+  async createOrder(amount: number): Promise<any> {
+    return this.http.post(`${this.backendUrl}/create-order`, { amount }).toPromise();
+  }
+
+  async pay(amount: number, name: string, email: string, contact: string): Promise<void> {
+    try {
+      const order = await this.createOrder(amount);
+
+      const options = {
+        key: 'rzp_test_Yq4PPi0sH7WUKV', // Test key
+        amount: order.amount,
+        currency: 'INR',
         name: name,
-        email: email,
-        contact: contact
-      },
-      theme: {
-        color: '#3399cc'
-      },
-      handler: (response: any) => {
-        // Handle successful payment here
-        console.log(response);
-        alert('Payment Successful');
-      },
-      modal: {
-        ondismiss: function () {
-          alert('Payment popup closed');
+        description: 'StayNest Booking Payment',
+        order_id: order.id,
+        prefill: {
+          name: name,
+          email: email,
+          contact: contact
+        },
+        theme: {
+          color: '#3399cc'
+        },
+        handler: (response: any) => {
+          console.log('Payment Success:', response);
+          alert('Payment successful!');
+        },
+        modal: {
+          ondismiss: function () {
+            alert('Payment popup closed.');
+          }
         }
-      }
-    };
+      };
 
-    const rzp = new Razorpay(options);
-    rzp.open();
+      const rzp = new Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error('Error during payment:', error);
+      alert('Payment failed to initialize');
+    }
   }
 }
