@@ -11,16 +11,15 @@ export class PaymentGatewayComponent {
 
   constructor(private router: Router, private paymentService: PaymentService) {}
 
-  completePayment() {
-    const dummyUser = {
-      name: 'Anish',
-      email: 'anish@example.com',
-      contact: '9876543210'
-    };
+async completePayment() {
+  const amount = 5000; // Amount in INR
+  const name = 'Test User'; // Replace with actual user name
+  const email = 'test@example.com'; // Replace with actual user email
+  const contact = '9876543210'; // Replace with actual contact number
 
-    const amount = 500; // ₹5.00 in INR
+  await this.paymentService.pay(amount, name, email, contact);
 
-    this.paymentService.pay(amount, dummyUser.name, dummyUser.email, dummyUser.contact)
+    this.paymentService.pay(amount, name, email, contact)
       .then(() => {
         this.router.navigate(['/booking-confirmation']);
       });
