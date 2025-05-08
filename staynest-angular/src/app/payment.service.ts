@@ -26,7 +26,7 @@ export class PaymentService {
         currency: 'INR',
         name: name,
         description: 'StayNest Booking Payment',
-        order_id: '123',
+        order_id: order.id,
         prefill: {
           name: name,
           email: email,
