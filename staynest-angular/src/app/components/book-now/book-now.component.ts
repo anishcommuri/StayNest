@@ -13,10 +13,9 @@ export class BookNowComponent {
 
   initiatePayment() {
     // Call your backend to create order
-    this.http.post<any>('http://localhost:3000/create-order', { amount: 500 })
+    this.http.post<any>('http://localhost:3000/create-order', { amount: 50000 })
       .subscribe(order => {
-        this.paymentService.payWithRazorpay(
-          order.id,
+        this.paymentService.pay(
           order.amount / 100,
           'Your Name',
           'youremail@example.com',
