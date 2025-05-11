@@ -79,10 +79,10 @@ POST	/create-order	Creates a Razorpay order
 
 🙌 Contributors
 👩‍💻 Main Contributor
-SakshiK91
+SakshiK91 - https://github.com/SakshiK91
 
 👨‍💻 Sub Contributor
-ashishcommuri
+AshishCommuri - 
 
 We thank all contributors for their valuable efforts!
 
