@@ -65,7 +65,7 @@ npm install
 node server.js
 Or use Render for deployment (as already configured).
 
-```
+
 💳 Payment Integration (Razorpay)
 The app creates orders via the /create-order endpoint on the backend.
 
