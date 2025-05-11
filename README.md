@@ -99,4 +99,4 @@ ashishcommuri
 We thank all contributors for their valuable efforts!
 
 📜 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the The Unlicense License - see the LICENSE file for details.
