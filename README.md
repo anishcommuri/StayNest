@@ -33,9 +33,6 @@ The project integrates **Razorpay** for secure online payments and is deployed u
 staynest-angular/ → Angular frontend application
 staynest-backend/ → Node.js Express backend server
 
-bash
-Copy
-Edit
 
 ## 🧑‍💻 Getting Started
 
@@ -45,39 +42,30 @@ Edit
 - Angular CLI
 - Git
 
-### Clone the Repository
-
 ```bash
+### Clone the Repository
 git clone https://github.com/YOUR-USERNAME/StayNest.git
+
 cd StayNest
+--
 Frontend Setup (Angular)
-bash
-Copy
-Edit
 cd staynest-angular
 npm install
 ng serve
+--
 To build for production:
-
-bash
-Copy
-Edit
 ng build --configuration production --base-href "https://YOUR-USERNAME.github.io/StayNest/"
-Then publish using:
 
-bash
-Copy
-Edit
+Then publish using:
 npx angular-cli-ghpages --dir=dist/staynest-angular
+
 Backend Setup (Node.js)
-bash
-Copy
-Edit
 cd staynest-backend
 npm install
 node server.js
 Or use Render for deployment (as already configured).
 
+```
 💳 Payment Integration (Razorpay)
 The app creates orders via the /create-order endpoint on the backend.
 
