@@ -9,3 +9,24 @@
     color: #fff !important;
     border: none;
 }
+
+/* Default size for large screens */
+.logo-img {
+    height: 110px;
+    object-fit: contain;
+  }
+  
+  /* Shrink for medium screens */
+  @media (max-width: 768px) {
+    .logo-img {
+      height: 70px;
+    }
+  }
+  
+  /* Shrink more for small screens */
+  @media (max-width: 480px) {
+    .logo-img {
+      height: 50px;
+    }
+  }
+  

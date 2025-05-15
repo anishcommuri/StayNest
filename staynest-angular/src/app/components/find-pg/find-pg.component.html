@@ -1,120 +1,107 @@
 <section class="container mt-5">
   <h2 class="mb-4 text-center titletxt">Search Your Perfect Stay</h2>
 
-  <!-- Filters Section -->
   <div class="row filters align-items-center mb-4 gx-4 bg-light p-4 rounded shadow-sm">
     <!-- Price Filter -->
     <div class="col-md-3 mb-3 mb-md-0">
       <label for="priceFilter" class="form-label fw-bold">Price Range</label>
-      <div class="input-group">
-        <select
-          id="priceFilter"
-          [(ngModel)]="selectedPrice"
-          (change)="applyFilters()"
-          class="form-select"
-        >
-          <option value="">All Prices</option>
-          <option value="3000">Under ₹5000</option>
-          <option value="5000">Under ₹8000</option>
-          <option value="8000">Under ₹10000</option>
-        </select>
-      </div>
+      <select
+        id="priceFilter"
+        [(ngModel)]="selectedPrice"
+        (change)="applyFilters()"
+        class="form-select"
+      >
+        <option value="">All Prices</option>
+        <option value="3000">Under ₹5000</option>
+        <option value="5000">Under ₹8000</option>
+        <option value="8000">Under ₹10000</option>
+      </select>
     </div>
 
     <!-- Sharing Filter -->
     <div class="col-md-3 mb-3 mb-md-0">
       <label for="sharingFilter" class="form-label fw-bold">Sharing Type</label>
-      <div class="input-group">
-        <select
-          id="sharingFilter"
-          [(ngModel)]="selectedSharing"
-          (change)="applyFilters()"
-          class="form-select"
-        >
-          <option value="">All Sharing Types</option>
-          <option value="Single">Single</option>
-          <option value="Double">Double</option>
-          <option value="Triple">Triple</option>
-        </select>
-      </div>
+      <select
+        id="sharingFilter"
+        [(ngModel)]="selectedSharing"
+        (change)="applyFilters()"
+        class="form-select"
+      >
+        <option value="">All Sharing Types</option>
+        <option value="Single">Single</option>
+        <option value="Double">Double</option>
+        <option value="Triple">Triple</option>
+      </select>
     </div>
 
-    <!-- Amenities Filter -->
+    <!-- Amenities -->
     <div class="col-md-6 d-flex flex-wrap">
       <label class="form-check-label me-4">
-        <input
-          type="checkbox"
-          (change)="toggleAmenity('Wifi')"
-          class="form-check-input me-1"
-        />
+        <input type="checkbox" (change)="toggleAmenity('Wifi')" class="form-check-input me-1" />
         Wifi
       </label>
       <label class="form-check-label me-4">
-        <input
-          type="checkbox"
-          (change)="toggleAmenity('AC')"
-          class="form-check-input me-1"
-        />
+        <input type="checkbox" (change)="toggleAmenity('AC')" class="form-check-input me-1" />
         AC
       </label>
       <label class="form-check-label">
-        <input
-          type="checkbox"
-          (change)="toggleAmenity('Laundry')"
-          class="form-check-input me-1"
-        />
+        <input type="checkbox" (change)="toggleAmenity('Laundry')" class="form-check-input me-1" />
         Laundry
       </label>
     </div>
   </div>
 
   <!-- Search Input -->
-  <div class="col-md-6 d-flex flex-wrap">
+  <div class="position-relative mb-5 col-md-6">
     <input
       type="text"
       [(ngModel)]="searchQuery"
       (input)="applyFilters()"
-      class="form-control mb-5 shadow-sm"
+      (keydown)="onKeyDown($event)"
+      class="form-control shadow-sm"
       placeholder="🔍 Search by name or location..."
     />
+    <ul
+      class="list-group position-absolute w-100 zindex-dropdown"
+      *ngIf="suggestions.length > 0"
+      style="max-height: 200px; overflow-y: auto;"
+    >
+      <li
+        class="list-group-item list-group-item-action"
+        *ngFor="let suggestion of suggestions; let i = index"
+        (click)="selectSuggestion(suggestion)"
+        [class.active]="i === highlightedIndex"
+        style="cursor: pointer;"
+      >
+        {{ suggestion }}
+      </li>
+    </ul>
   </div>
 
-  <!-- PG List Results -->
+  <!-- PG List -->
   <div class="row" *ngIf="filteredPGs.length > 0; else noResults">
     <div class="col-md-4 mb-4" *ngFor="let pg of filteredPGs">
       <div class="card h-100">
         <img [src]="pg.image" [alt]="pg.name" class="card-img-top" />
         <div class="card-body">
-          <!-- Name and Rating -->
           <div class="d-flex justify-content-between align-items-center mb-2">
             <h5 class="card-title mb-0">{{ pg.name }}</h5>
-            <span>
-              <i class="fa-solid fa-star"></i> {{ pg.rating || 'N/A' }}
-            </span>
+            <span><i class="fa-solid fa-star"></i> {{ pg.rating || 'N/A' }}</span>
           </div>
-
-          <!-- Location and Price -->
           <p class="card-text mb-1">{{ pg.location }}</p>
           <p class="card-text mb-1 fw-semibold">₹{{ pg.price }}</p>
-
-          <!-- Sharing and Amenities -->
           <p class="card-text mb-1">{{ pg.sharingType }}</p>
           <p class="card-text mb-1">{{ pg.amenities.join(', ') }}</p>
-
-          <!-- Book Now Button -->
           <a
             [routerLink]="['/book-now']"
             [queryParams]="{ pg: pg.name, price: pg.price }"
             class="btn btn-primary mt-2"
-          >
-            Book Now
-          </a>
+          >Book Now</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- No Results Template -->
   <ng-template #noResults>
     <div class="alert alert-warning text-center">
       No PGs found matching your criteria.

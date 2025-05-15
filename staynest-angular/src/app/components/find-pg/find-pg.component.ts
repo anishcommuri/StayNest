@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { PgService } from '../../services/pg.service'; // Import the service
+import { PgService } from '../../services/pg.service';
 
 @Component({
   selector: 'app-find-pg',
   templateUrl: './find-pg.component.html',
   styleUrls: ['./find-pg.component.css'],
+  standalone: true,
   imports: [RouterModule, FormsModule, CommonModule],
 })
 export class FindPgComponent implements OnInit {
@@ -18,23 +19,32 @@ export class FindPgComponent implements OnInit {
   selectedAmenities: string[] = [];
   searchQuery: string = '';
 
-  constructor(private pgService: PgService) {} // Inject the PgService
+  suggestions: string[] = [];
+  highlightedIndex: number = -1;
+
+  constructor(private pgService: PgService) {}
 
   ngOnInit(): void {
-    // Fetch PG data using the service
-    this.pgService.getPGs().subscribe(
-      (data: any[]) => {
-        this.allPGs = data;
-        this.filteredPGs = [...this.allPGs]; // Initialize with all PGs
-      },
-    );
+    this.pgService.getPGs().subscribe((data: any[]) => {
+      this.allPGs = data;
+      this.filteredPGs = [...this.allPGs];
+    });
   }
 
   applyFilters(): void {
+    const query = this.searchQuery.toLowerCase();
+
+    this.suggestions = this.allPGs
+      .map(pg => [pg.name, pg.location])
+      .flat()
+      .filter(item => item.toLowerCase().includes(query))
+      .filter((value, index, self) => self.indexOf(value) === index)
+      .slice(0, 5);
+
     this.filteredPGs = this.allPGs.filter((pg) => {
       const matchesSearch =
-        pg.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        pg.location.toLowerCase().includes(this.searchQuery.toLowerCase());
+        pg.name.toLowerCase().includes(query) ||
+        pg.location.toLowerCase().includes(query);
 
       const matchesPrice =
         !this.selectedPrice || pg.price <= parseInt(this.selectedPrice);
@@ -50,6 +60,8 @@ export class FindPgComponent implements OnInit {
 
       return matchesSearch && matchesPrice && matchesSharing && matchesAmenities;
     });
+
+    this.highlightedIndex = -1;
   }
 
   toggleAmenity(amenity: string): void {
@@ -58,6 +70,29 @@ export class FindPgComponent implements OnInit {
     } else {
       this.selectedAmenities.push(amenity);
     }
+    this.applyFilters();
+  }
+
+  onKeyDown(event: KeyboardEvent): void {
+    if (this.suggestions.length === 0) return;
+
+    if (event.key === 'ArrowDown') {
+      this.highlightedIndex = (this.highlightedIndex + 1) % this.suggestions.length;
+      event.preventDefault();
+    } else if (event.key === 'ArrowUp') {
+      this.highlightedIndex = (this.highlightedIndex - 1 + this.suggestions.length) % this.suggestions.length;
+      event.preventDefault();
+    } else if (event.key === 'Enter') {
+      if (this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
+        this.selectSuggestion(this.suggestions[this.highlightedIndex]);
+        event.preventDefault();
+      }
+    }
+  }
+
+  selectSuggestion(suggestion: string): void {
+    this.searchQuery = suggestion;
+    this.suggestions = [];
     this.applyFilters();
   }
 }

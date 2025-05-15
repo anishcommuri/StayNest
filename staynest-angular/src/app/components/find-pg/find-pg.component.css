@@ -1,11 +1,19 @@
-/* Ensure all card images have the same size */
 .card-img-top {
-    height: 200px; /* Set a fixed height */
-    object-fit: cover; /* Ensure the image scales properly without distortion */
-    width: 100%; /* Make the image fill the card width */
-    border-radius: 5px; /* Optional: Add rounded corners */
-  }
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 5px;
+}
 
-.fa-star{
-    color: gold;
+.fa-star {
+  color: gold;
+}
+
+.zindex-dropdown {
+  z-index: 1050;
+}
+
+.list-group-item.active {
+  background-color: #007bff;
+  color: white;
 }

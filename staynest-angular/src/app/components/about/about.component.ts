@@ -12,7 +12,7 @@ export class AboutComponent {
   whoWeAreDescription = `At Staynest, we are redefining student and professional living. Our platform connects you with verified PGs and hostels, offering transparent pricing, real 3D room views, and certified food and amenities standards. We make finding your next home simple, safe, and reliable — so you can focus on what truly matters.`;
   whoWeAreDescription2 = `Staynest: Stay Better, Live Smarter.`
   missionvissionTitle = 'Our Mission & Vision';
-  missionvissionDescription = `Making students fill at home again.`;
+  missionvissionDescription = `Making students feel at home again.`;
   visionTitle = 'Vision';
   visionDescription = `To be India’s most loved PG discovery and booking platform – where affordability, safety, and comfort come together effortlessly.`;
 

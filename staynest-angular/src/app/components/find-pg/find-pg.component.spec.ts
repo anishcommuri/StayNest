@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FindPgComponent } from './find-pg.component';
 
 describe('FindPgComponent', () => {
@@ -8,9 +7,8 @@ describe('FindPgComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FindPgComponent]
-    })
-    .compileComponents();
+      imports: [FindPgComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FindPgComponent);
     component = fixture.componentInstance;
